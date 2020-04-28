@@ -75,6 +75,7 @@ namespace Senparc.CO2NET.Cache.Memcached
         /// <param name="configurationString">连接字符串</param>
         public static void RegisterServerList(string configurationString)
         {
+            //这个if里面应该重新修改，appsetting中的2个示例配置，在这里无法全部实现
             if (!string.IsNullOrEmpty(configurationString))
             {
                 var dic = new Dictionary<string, int>();
@@ -118,7 +119,7 @@ namespace Senparc.CO2NET.Cache.Memcached
             //自动注册连接字符串信息
             if ((_serverlist == null || _serverlist.Count == 0) &&
                 !string.IsNullOrEmpty(Config.SenparcSetting.Cache_Memcached_Configuration)
-                && Config.SenparcSetting.Cache_Memcached_Configuration != "Memcached配置")
+                && Config.SenparcSetting.Cache_Memcached_Configuration != "#{Cache_Memcached_Configuration}#")
             {
                 RegisterServerList(Config.SenparcSetting.Cache_Memcached_Configuration);
             }
